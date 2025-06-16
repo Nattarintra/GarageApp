@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GarageConsoleApp.Vehicles.Cars
+namespace GarageConsoleApp.Vehicles.VehiclesSubclass.Cars
 {
     internal class Car : WheeledVehicle
     {
         public int NumberOfSeats { get; }
-        public Car(string registrationNumber, string color, int wheels, int numberOfSeats) 
-            : base(registrationNumber, color, wheels)
+        public Car(string reg, string color, int wheels, int numberOfSeats) 
+            : base(reg, color, wheels)
         {
             if (numberOfSeats <= 0)
             {
