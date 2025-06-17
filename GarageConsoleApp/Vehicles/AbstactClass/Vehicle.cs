@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GarageConsoleApp.Vehicles.AbstactClass.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace GarageConsoleApp.Vehicles.AbstactClass
 {
-    internal abstract class Vehicle
+    internal abstract class Vehicle : IVehicle
     {
-
         public string RegistrationNumber { get; }
         public string Color { get; }
-       
         protected Vehicle(string registrationNumber, string color)
         {
             if ( string.IsNullOrWhiteSpace(registrationNumber))
@@ -28,9 +27,6 @@ namespace GarageConsoleApp.Vehicles.AbstactClass
         public override string ToString()
         {
             return GetDescription();
-        }
-
-       
-
+        } 
     }
 }
