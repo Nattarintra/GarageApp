@@ -11,7 +11,7 @@ namespace GarageConsoleApp.Vehicles.VehiclesSubclass.Boats
     {
         public double Length { get; }
 
-        public Boat( string reg, string color) : base(reg, color)
+        public Boat( string reg, string color, double length) : base(reg, color)
         {
             if (Length <= 0)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GarageConsoleApp.Vehicles.AbstactClass.Interfaces
 {
-    internal interface IVehicle
+    public interface IVehicle
     {
         string RegistrationNumber { get; }
         string Color { get; }

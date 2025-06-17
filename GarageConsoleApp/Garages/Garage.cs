@@ -1,13 +1,16 @@
 ﻿using GarageConsoleApp.Vehicles.AbstactClass.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+[assembly: InternalsVisibleTo("GarageConsole.Tests")] // Allow unit tests to access internal members
 namespace GarageConsoleApp.Garages
 {
-    internal class Garage <T> where T : IVehicle 
+    
+    internal class Garage <T> : IEnumerable<T> where T : IVehicle 
     {
         private T[] slots;
         public Garage(int capacity) { 
@@ -23,25 +26,47 @@ namespace GarageConsoleApp.Garages
 
         public bool AddVehicle(T vechicle)
         {
-            // Check if the registration is existing in the garage
-            foreach (var v in slots)
-            {
-                if (v != null && 
-                    v.RegistrationNumber.Equals(vechicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase))
-                {
-                    return false; // Vehicle already exists
-                }
-            }
+
+            int? firstEmptySlot = null;
 
             for (int i = 0; i < slots.Length; i++)
             {
-                if (slots[i] == null)
+                var v = slots[i];
+                if (v != null &&
+                   v.RegistrationNumber.Equals(vechicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
-                    slots[i] = vechicle;
-                    return true; // Vehicle added successfully
+                    return false; // Vehicle already exists
                 }
+
+                if (v == null && firstEmptySlot == null)
+                {
+                    firstEmptySlot = i; // Found the first empty slot
+                }
+   
+            }
+            if  (firstEmptySlot != null)
+            {
+                slots[firstEmptySlot.Value] = vechicle;
+                Console.WriteLine("Successfully add " + firstEmptySlot.Value);
+                return true; // Vehicle added successfully
             }
             return false; // No available slot
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var vehicle in slots)
+            {
+                if (vehicle != null)
+                {
+                    yield return vehicle;
+                }
+            }   
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
