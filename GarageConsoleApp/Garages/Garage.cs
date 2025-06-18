@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("GarageConsole.Tests")] // Allow unit tests to access internal members
@@ -13,16 +14,29 @@ namespace GarageConsoleApp.Garages
     internal class Garage <T> : IEnumerable<T> where T : IVehicle 
     {
         private T[] slots;
+        // Initializes a new instance of the Garage class with a specified capacity.
         public Garage(int capacity) { 
         slots = new T[capacity];
         }
 
-        /// Todo: Adds a vehicle to the garage if there is an available slot.
-        /// Todo: Removes the vehicle from the garage if it is already present.
         /// Todo: Displays total number of vehicles in the garage.
-        /// Todo: given Garage capcity when user creates a new agarage.
-        /// Todo: Search for a vehicle by its registration number.
-        /// 
+       
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var vehicle in slots)
+            {
+                if (vehicle != null)
+                {
+                    yield return vehicle;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+        /// <summary> Adds a vehicle to the garage if there is an available slot.</summary>
 
         public bool AddVehicle(T vechicle)
         {
@@ -31,14 +45,16 @@ namespace GarageConsoleApp.Garages
 
             for (int i = 0; i < slots.Length; i++)
             {
-                var v = slots[i];
-                if (v != null &&
-                   v.RegistrationNumber.Equals(vechicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase))
+                var vehicle = slots[i];
+
+                if (vehicle != null &&
+                   vehicle.RegistrationNumber.Equals(vechicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase))
                 {
+                    Console.WriteLine(vehicle.RegistrationNumber + " is already exist.");
                     return false; // Vehicle already exists
                 }
 
-                if (v == null && firstEmptySlot == null)
+                if (vehicle == null && firstEmptySlot == null)
                 {
                     firstEmptySlot = i; // Found the first empty slot
                 }
@@ -53,20 +69,41 @@ namespace GarageConsoleApp.Garages
             return false; // No available slot
         }
 
-        public IEnumerator<T> GetEnumerator()
+        /// Todo: Removes the vehicle from the garage if it is already present.
+
+        public bool RemoveVehicle(string regNumber)
         {
-            foreach (var vehicle in slots)
+  
+            int index = FindIndexByRegistration(regNumber);
+            if (index >= 0)
             {
-                if (vehicle != null)
-                {
-                    yield return vehicle;
-                }
-            }   
+                slots[index] = default; // Remove the vehicle by setting the slot to default (null for reference types)
+                Console.WriteLine("Successfully removed " + regNumber);
+                return true; // Vehicle removed successfully
+            }
+                Console.WriteLine( regNumber + " Not found");
+            return false; // Vehicle not found
+
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        private int FindIndexByRegistration(string regNumber)
         {
-            return GetEnumerator();
+            for (int i = 0; i < slots.Length; i++)
+            {
+                var vehicle = slots[i];
+                if (vehicle != null && 
+                    vehicle.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase))
+                {
+                    return i; // Found the index of the vehicle
+                }
+            }
+            return -1; // Vehicle not found
         }
+
+        /// Todo: Search for a vehicle by its registration number.
+        
+
+
+
     }
 }

@@ -11,5 +11,8 @@ garage.AddVehicle(new Car("BBB222", "Honda", 4, 5));  // Slot 1
 garage.AddVehicle(new Car("CCC333", "Nissan", 4, 5)); // Slot 2
 garage.AddVehicle(new Car("AAA111", "Mazda", 4, 5));  // Should fail - duplicate
 
+garage.RemoveVehicle("AAA111"); // Remove first vehicle
+garage.RemoveVehicle("AAA110"); // Remove first vehicle
+
 //garage.AddVehicle(new Boat("BOAT001", "White", 2 ));
 
