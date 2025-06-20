@@ -26,7 +26,7 @@ namespace GarageConsoleTests
 
             // Assert
             Assert.Equal(expected, actual);
-            Assert.Equal(1, garage.Count()); // Ensure only one vehicle is present
+            Assert.Single(garage); // Ensure only one vehicle is present
             Assert.Equal(car, garage.FirstOrDefault(v => v.RegistrationNumber == "AAA111")); // Ensure the vehicle is still there
 
         }
@@ -46,7 +46,7 @@ namespace GarageConsoleTests
             
             // Assert
             Assert.Equal(expected, actual);
-            Assert.Equal(1, garage.Count());
+            Assert.Single(garage);
             Assert.Equal(car, garage.FirstOrDefault(v => v.RegistrationNumber == "AAA111"));
 
         }

@@ -13,11 +13,12 @@ namespace GarageConsoleApp.Vehicles.VehiclesSubclass.Boats
 
         public Boat( string reg, string color, double length) : base(reg, color)
         {
-            if (Length <= 0)
+            if (length <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(Length), "Length must be greater than zero.");
+                throw new ArgumentOutOfRangeException(nameof(length), "Length must be greater than zero.");
             }
-            Length = Length;
+
+            Length = length;
         }
 
         public override string GetDescription()

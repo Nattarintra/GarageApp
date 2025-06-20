@@ -21,7 +21,7 @@ namespace GarageConsoleApp.Vehicles.VehiclesSubclass.Motorcycles
         }
         public override string GetDescription()
         {
-            return $"Motorcycle: {RegistrationNumber}, Color: {Color}, Wheels: {Wheels}, Has Sidecar: {CylinderVolume}";
+            return $"Motorcycle: {RegistrationNumber}, Color: {Color}, Wheels: {Wheels}, Has cylinder volume: {CylinderVolume}";
         }
     }
 }
