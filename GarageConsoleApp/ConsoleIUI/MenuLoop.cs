@@ -15,6 +15,7 @@ namespace GarageConsoleApp.ConsoleIUI
         }
 
         public void RunLoop()
+  
         {
             do
             {
@@ -25,16 +26,16 @@ namespace GarageConsoleApp.ConsoleIUI
                 switch (choice)
                 {
                     case "1":
-                        _handler.InitializeGarage();
+                        _handler.PopulateSampleGarage();
                         break;
                     case "2":
-                        _handler.ParkingVehicle();
+                        _handler.HandleAddVehicle();
                         break;
                     case "3":
-                        _handler.LeavingVehicle();                      
+                        _handler.HandleRemoveVehicle();                      
                         break;
                     case "4":
-                        _handler.FindVehicleByRegNO();                      
+                        _handler.HandleSearchVehicle();                      
                         break;
                     case "5":
                         _ui.Print("Logic to list all vehicles");

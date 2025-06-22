@@ -9,10 +9,11 @@ namespace GarageConsoleApp.GarageHandlers
 {
     public interface IHandler
     {
-        void InitializeGarage();
-        void ParkingVehicle();
-        void LeavingVehicle();
-        void FindVehicleByRegNO();
+
+        void PopulateSampleGarage();
+        void HandleAddVehicle();
+        void HandleRemoveVehicle();
+        void HandleSearchVehicle();
         //void CountVehicles();
     }
 }
