@@ -14,6 +14,7 @@ namespace GarageConsoleApp.GarageHandlers
         void HandleAddVehicle();
         void HandleRemoveVehicle();
         void HandleSearchVehicle();
-        //void CountVehicles();
+        void HandleListVehicles();
+        void HandleCountByType();
     }
 }

@@ -24,6 +24,7 @@ namespace GarageConsoleApp.ConsoleIUI
             _ui.Print("3. Remove Vehicle");
             _ui.Print("4. Search Vehicle");
             _ui.Print("5. List Vehicles");
+            _ui.Print("6. Show Vehicle types");
             _ui.Print("0. Exit");
         }
     }

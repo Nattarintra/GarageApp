@@ -54,6 +54,19 @@ namespace GarageConsoleApp.GarageHandlers
             searcher.Execute();
         }
 
+        public void HandleListVehicles()
+        {
+           var lister = new ListVehicleHandler(_ui, _garage);
+            lister.Execute();
+
+        }
+
+        public void HandleCountByType()
+        {
+            var counter = new CountVehicleByTypeHandler(_ui, _garage);
+            counter.Execute();   
+        }
+
         private Vehicle? CreateVehicle(string type, string reg, string color)
         { 
             return VehicleInputHelper.CreateVehicle(_ui, type, reg, color); 

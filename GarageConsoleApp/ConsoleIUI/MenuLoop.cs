@@ -13,7 +13,6 @@ namespace GarageConsoleApp.ConsoleIUI
             _ui = ui;
             _handler = handler;
         }
-
         public void RunLoop()
   
         {
@@ -38,7 +37,10 @@ namespace GarageConsoleApp.ConsoleIUI
                         _handler.HandleSearchVehicle();                      
                         break;
                     case "5":
-                        _ui.Print("Logic to list all vehicles");
+                        _handler.HandleListVehicles();
+                        break;
+                    case "6":
+                        _handler.HandleCountByType();
                         break;
                     case "0":
                         _ui.Print("Exiting the system. Goodbye!");
